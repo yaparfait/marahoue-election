@@ -1,0 +1,8 @@
+body {
+  margin: 10;
+  font-family: var(--font-family);
+  background-color: #ebebeb; /* #eff2f7 #d4d3d8 #ebebeb */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /*color: var(--text-color);*/
+}
