@@ -5,14 +5,15 @@ import 'primeflex/primeflex.css';
 import '../styles/Accueil.css';
 import MenuGeneral from './MenuGeneral';
 import { BreadCrumb } from 'primereact/breadcrumb';
-//import imgAccueil from '../assets/hero-1.png';
 import askPic from '../assets/ask_pic1.jpg';
-//import armoirie from '../assets/logo.png';
 //import logoMarahoue from '../assets/laMarahoue.png';
+//import { useAuthUser, useAuthHeader } from 'react-auth-kit';
 
 function Accueil() {
   const items = [{ label: 'Bienvenue sur le système de gestion electronique de l\'election municipale' }];
   const home = { icon: 'pi pi-home', url: '/accueil' }
+  //const auth = useAuthUser();
+  //const authHeader = useAuthHeader();
 
   return (
     <div>

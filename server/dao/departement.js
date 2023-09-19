@@ -4,7 +4,7 @@ const uuid = require("uuid")
 async function getDepartementsByRegion(idregion) {
     try {
         // Use pool.query to get all contacts
-        const results = await db.pool.query("SELECT d.iddept, d.libdept, r.idregion, r.libregion FROM election.departement d, election.region r WHERE d.idregion=r.idregion AND d.idregion=?", [idregion]);
+        const results = await db.pool.query("SELECT d.iddept, d.libdept, r.idregion, r.libregion FROM departement d, region r WHERE d.idregion=r.idregion AND d.idregion=?", [idregion]);
 
         // Print list of contacts
         /*
@@ -23,7 +23,7 @@ async function getDepartementsByRegion(idregion) {
 async function getDepartements() {
     try {
         // Use pool.query to get all contacts
-        const results = await db.pool.query("SELECT * FROM election.departement");
+        const results = await db.pool.query("SELECT * FROM departement");
         return results;
     } catch (err) {
         // Print errors
@@ -38,7 +38,7 @@ async function createDepartement(libdept, idregion) {
         // Acquire a connection from the connection pool
         conn = await db.pool.getConnection();
         // Use connection.query to get all contacts
-        const insertQuery = "INSERT INTO election.departement (iddept, libdept, idregion) VALUES (?, ?, ?)";
+        const insertQuery = "INSERT INTO departement (iddept, libdept, idregion) VALUES (?, ?, ?)";
         const result = await conn.query(insertQuery, [myuuid, libdept, idregion]);
         return "Insertion effectuée avec succès";
     } catch (err) {
@@ -53,7 +53,7 @@ async function createDepartement(libdept, idregion) {
 async function getDepartementById(iddept) {
     try {
         // Use pool.query to get all contacts
-        const result = await db.pool.query("SELECT * FROM election.departement WHERE iddept=?", [iddept]);
+        const result = await db.pool.query("SELECT * FROM departement WHERE iddept=?", [iddept]);
 
         return result;
     } catch (err) {
@@ -68,7 +68,7 @@ async function updateDepartement(iddept, libdept) {
         // Acquire a connection from the connection pool
         conn = await db.pool.getConnection();
         // Update contact data
-        const result = await conn.query("UPDATE election.departement SET libdept = ? WHERE iddept = ?", [libdept, iddept]);
+        const result = await conn.query("UPDATE departement SET libdept = ? WHERE iddept = ?", [libdept, iddept]);
         //console.log(result);
         return "Mise a jour effectuée avec succès";
     } catch (err) {
@@ -83,7 +83,7 @@ async function deleteDepartement(iddept) {
     let conn;
     try {
         conn = await db.pool.getConnection();
-        const result = await conn.query("DELETE FROM election.departement WHERE iddept = ?", [iddept]);
+        const result = await conn.query("DELETE FROM departement WHERE iddept = ?", [iddept]);
         return "Suppression effectuée avec succès";
     } catch (err) {
         // Print errors

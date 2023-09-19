@@ -78,7 +78,7 @@ router.post("/login", (req, res) => {
             expiresIn: process.env.JWT_EXPIRES_IN
 	    })
 
-        res.json({token: token, user: {username: users[0].username, email: users[0].email, nomprenom: users[0].nomprenom}})
+        res.json({token: token, user: {username: users[0].username, email: users[0].email, nomprenom: users[0].nomprenom, profile: users[0].profile}})
     })
 });
 

@@ -10,8 +10,8 @@ async function getAllUsers() {
 async function getUserByUsername(username) {
     
     const response = await fetch("/users/" + username);
-    const body = await response.json();
-    return body;
+    //const body = await response.json();
+    return response;
 
 }
 
@@ -19,11 +19,11 @@ async function registerUser(user){
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(vote)
+        body: JSON.stringify(user)
     };
     const response = await fetch("/users/register", requestOptions);
     const body = await response.json();
-    const status = JSON.stringify(body).includes('succès') ? response.status : 400;
+    const status = JSON.stringify(body).includes('succès') ? 200 : response.status;
     return {"message": body, "status" : status};
 }
 
@@ -31,10 +31,10 @@ async function loginUser(user){
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(vote)
+        body: JSON.stringify(user)
     };
-    const response = await fetch("/users/login", requestOptions);
-    const body = await response.json();
-    const status = JSON.stringify(body).includes('succès') ? response.status : 400;
-    return {"message": body, "status" : status};
+    const response = fetch("/users/login", requestOptions);
+    return response;
 }
+
+module.exports = {getAllUsers, getUserByUsername, registerUser, loginUser};

@@ -1,0 +1,12 @@
+.btn-quitter {
+    width: 2rem; 
+    height: 2rem;
+    background-color: var(--red-100);
+}
+
+.btn-quitter:hover {
+    width: 2.5rem; 
+    height: 2.5rem;
+    background-color: var(--red-200);
+    transition: all 0.70s;
+}

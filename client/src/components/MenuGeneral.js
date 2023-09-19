@@ -2,11 +2,14 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
+import '../styles/MenuGeneral.css';
 import { useState } from 'react';
+import { useSignOut } from "react-auth-kit";
 import { useNavigate } from "react-router-dom";
 import { Menubar } from 'primereact/menubar';
 import { Button } from 'primereact/button';
 import { Dialog } from 'primereact/dialog';
+//import { Tooltip } from 'primereact/tooltip';
 //import { InputText } from 'primereact/inputtext';
 //import logoUser from "../assets/logo_user.png";
 import armoirie from "../assets/armoiries.png";
@@ -15,6 +18,7 @@ import armoirie from "../assets/armoiries.png";
 function MenuGeneral() {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
+    const signOut = useSignOut();
 /*
     const items = [
         {
@@ -88,20 +92,16 @@ function MenuGeneral() {
             label: 'Parametrage',
             icon: 'pi pi-cog',
             command: () => navigate('/parametrage')
-        },   
-        {
-            label: '',
-            icon: 'pi pi-th-large'
-        },     
-        {
-            label: 'Quitter',
-            icon: 'pi pi-fw pi-power-off',
-            command: () => setVisible(true)
         }
     ];
 
     const start = <img alt="logo" src={armoirie} height="40" className="mr-2"></img>;
-    const end = <div className="text-primary font-bold mb-2"><span>YAO Amani Parfait</span></div>;
+    const end = <div>
+                    <div className="flex align-items-center justify-content-center border-round btn-quitter"> 
+                        <i className="pi pi-power-off text-red-500 text-xl" onClick={() => setVisible(true)}/>                    
+                    </div>                                     
+                </div>;                  
+                
     //const end = <InputText placeholder="Search" type="text" className="w-full" />; <img alt="logo" src={logoUser} height="30" className="mr-2"/>
     const footerContent = (
         <div>
@@ -111,6 +111,7 @@ function MenuGeneral() {
     );
 
     function seDeconnecter() {
+        signOut();
         setVisible(false);
         navigate('/');
     }

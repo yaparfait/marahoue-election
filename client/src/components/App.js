@@ -1,4 +1,3 @@
-import '../styles/App.css';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeflex/primeflex.css';
@@ -16,30 +15,74 @@ import PageTemplate from './PageTemplate';
 import Departement from './Departement';
 import SousprefCommune from './SousprefCommune';
 import CentreVote from './CentreVote';
-
+import { AuthProvider, RequireAuth } from 'react-auth-kit';
 
 function App() {
 
   useEffect(() => {
     document.title = "Municipales 2023 - Bouaflé"
-	}, [])
+  }, [])
 
   return (
-    <BrowserRouter>
+    <AuthProvider
+      authType={"cookie"}
+      authName={"_auth"}
+      cookieDomain={window.location.hostname}
+      cookieSecure={false}
+    >
+      <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Connexion />} />
-          <Route exact path="/accueil" element={<Accueil />} />
-          <Route exact path="/saisie" element={<Saisie />} />
-          <Route exact path="/saisie-mairie" element={<SaisieMairie />} />
-          <Route exact path="/saisie-region" element={<SaisieRegion />} />
-          <Route exact path="/consultation" element={<ConsultationSaisie />} />
-          <Route exact path="/parametrage" element={<Parametrage />} />
+          <Route exact path="/accueil" element={
+            <RequireAuth loginPath='/'>
+              <Accueil />
+            </RequireAuth>
+          }/>
+          <Route exact path="/saisie" element={
+            <RequireAuth loginPath='/'>
+              <Saisie />
+            </RequireAuth>
+          }/>
+          <Route exact path="/saisie-mairie" element={
+            <RequireAuth loginPath='/'>
+              <SaisieMairie />
+            </RequireAuth>
+          }/>
+          <Route exact path="/saisie-region" element={
+            <RequireAuth loginPath='/'>
+              <SaisieRegion />
+            </RequireAuth>
+          }/>
+          <Route exact path="/consultation" element={
+            <RequireAuth loginPath='/'>
+              <ConsultationSaisie />
+            </RequireAuth>
+          }/>
+          <Route exact path="/parametrage" element={
+            <RequireAuth loginPath='/'>
+              <Parametrage />
+            </RequireAuth>
+          }/>
           <Route exact path="/template" element={<PageTemplate />} />
-          <Route exact path="/departements" element={<Departement />} />
-          <Route exact path="/souspref-commune" element={<SousprefCommune />} />
-          <Route exact path="/centre-vote" element={<CentreVote />} />
+          <Route exact path="/departements" element={
+            <RequireAuth loginPath='/'> 
+              <Departement />
+            </RequireAuth>
+          }/>
+          <Route exact path="/souspref-commune" element={
+            <RequireAuth loginPath='/'>
+              <SousprefCommune />
+            </RequireAuth>
+          }/>
+          <Route exact path="/centre-vote" element={
+            <RequireAuth loginPath='/'>
+              <CentreVote />
+            </RequireAuth>
+          }/>
         </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+
+    </AuthProvider>
   );
 }
 

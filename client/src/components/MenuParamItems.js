@@ -16,13 +16,15 @@ export default function MenuParamItems() {
                     label: 'Communes et Sous-Prefectures',
                     icon: 'pi pi-fw pi-map-marker',
                     command: () => navigate('/souspref-commune')
-                },
+                },               
                 {
-                    label: 'Localités',
-                    icon: 'pi pi-fw pi-external-link'
+                    label: 'Lieux de vote', 
+                    icon: 'pi pi-fw pi-sitemap',
+                    command: () => navigate('/centre-vote')
                 }
             ]
         },
+        /*
         {
             label: 'Centres de vote',
             items: [
@@ -37,6 +39,7 @@ export default function MenuParamItems() {
                 }
             ]
         },
+        */
         {
             label: 'Candidature',
             items: [
@@ -51,6 +54,19 @@ export default function MenuParamItems() {
                 {
                     label: 'Scrutins',
                     icon: 'pi pi-fw pi-envelope'
+                }
+            ]
+        },
+        {
+            label: 'Gestion des Comptes',
+            items: [
+                {
+                    label: 'Profiles',
+                    icon: 'pi pi-fw pi-lock'
+                },
+                {
+                    label: 'Utilisateurs',
+                    icon: 'pi pi-fw pi-user'
                 }
             ]
         }

@@ -6,9 +6,10 @@ import MenuGeneral from "./MenuGeneral";
 import { BreadCrumb } from 'primereact/breadcrumb';
 import { Chart } from 'primereact/chart';
 import { useState, useEffect } from 'react';
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
+//import { DataTable } from 'primereact/datatable';
+//import { Column } from 'primereact/column';
 import { Tag } from 'primereact/tag';
+import { DataView  } from 'primereact/dataview';
 //import askPic1 from '../assets/ask_pic1.jpg';
 import askPic2 from '../assets/ask_pic2.jpg';
 import otherCand from '../assets/app_user.png';
@@ -49,6 +50,33 @@ function ConsultationSaisie() {
     */
     const statusBodyTemplate = (resultat) => {
         return <Tag value={getTagValue(resultat)} severity={getSeverity(resultat)}></Tag>;
+    };
+
+    const itemTemplate = (resultat) => {
+        return (
+            <div className="col-12">
+                <div className="flex flex-column xl:flex-row xl:align-items-start p-3 gap-4">
+                    <img className="w-4 sm:w-4rem xl:w-3rem shadow-2 block xl:block mx-auto border-round" src={otherCand} alt={resultat.nomcand} />
+                    {/*<i className="pi pi-user text-primary text-2xl"></i>*/}
+                    <div className="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                        <div className="flex flex-column align-items-center sm:align-items-start gap-3">
+                            <div className="text-l font-bold">{resultat.nomcand}</div>
+                            <div className="flex align-items-center gap-3">
+                                <span className="flex align-items-center gap-2">
+                                    <i className="pi pi-tag"></i>
+                                    <span className="text-sm">{resultat.sigle}</span>
+                                </span>
+                                {statusBodyTemplate(resultat)}
+                            </div>
+                        </div>
+                        <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                            <span className="text-xl font-semibold">{resultat.score}</span>
+                            <span className="text-l">{resultat.score}%</span>
+                        </div>
+                    </div>
+                </div>    
+            </div>       
+        );
     };
 
     useEffect(() => {
@@ -147,10 +175,10 @@ function ConsultationSaisie() {
                         <div className="surface-card shadow-2 p-3 border-round">
                             <div className="flex justify-content-between mb-3">
                                 <div>
-                                    <span className="block text-500 font-medium mb-3">Vainqueur</span>
+                                    <span className="block text-500 text-xl font-medium mb-3">Vainqueur</span>
                                 </div>
                                 <div className="flex align-items-center justify-content-center bg-red-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
-                                    <i className="pi pi-heart text-red-500 text-xl"></i>
+                                    <i className="pi pi-heart fa-regular fa-user text-red-500 text-xl"></i>
                                 </div>
                             </div>
                             <div className="flex align-items-center">
@@ -160,16 +188,18 @@ function ConsultationSaisie() {
                                 {winners && winners.length===1 && winners[0].nomusuel==='YAO ETIENNE' && <img src={yaoPic} alt="illustration de M. le Maire" className="md:ml-auto  md:h-full" />}
                                 {winners && winners.length===1 && winners[0].nomusuel!=='ASK' && winners[0].nomusuel!=='YAO ETIENNE'  && <img src={otherCand} alt="Autres Candidats" className="md:ml-auto md:h-full" />}
                             </div>                           
-                            {/*<span className="text-green-500 font-medium">58%</span>*/}
                             <span className="text-500">Monsieur </span>
                             <span className="text-green-700 font-bold">{winners && winners.length===1 && winners[0].nomcand}</span>
+                        </div>
+                        <div className="surface-card shadow-2 p-3 mt-3 border-round">
+                            <DataView value={resultats} itemTemplate={itemTemplate} />
                         </div>
                     </div>
                     <div className="col-12 md:col-6 lg:col-8">
                         <div className="surface-card shadow-2 p-3 border-round">
                             <div className="flex justify-content-between mb-3">
                                 <div>
-                                    <span className="block text-500 font-medium mb-3">Resultats</span>
+                                    <span className="block text-500 text-xl font-medium mb-3">Resultats</span>
                                 </div>
                                 <div className="flex align-items-center justify-content-center bg-green-100 border-round" style={{ width: '2.5rem', height: '2.5rem' }}>
                                     <i className="pi pi-envelope text-green-500 text-xl"></i>
@@ -181,15 +211,17 @@ function ConsultationSaisie() {
                             <div className="card flex justify-content-center mt-5">
                                 <Chart type="pie" data={pieData} options={pieOptions} className="w-full md:w-30rem" />
                             </div>
+                            {/*
                             <div className="card flex justify-content-center mt-5">
-                            <DataTable value={resultats} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }} >
-                                <Column field="sigle" header="Parti" ></Column>
-                                <Column field="nomcand" header="Candidat" ></Column>
-                                <Column field="nomliste" header="Liste" ></Column>
-                                <Column field="score" header="Score"></Column>
-                                <Column field="score" header="Resultat" body={statusBodyTemplate}></Column>
-                            </DataTable>
+                                <DataTable value={resultats} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }} >
+                                    <Column field="sigle" header="Parti" ></Column>
+                                    <Column field="nomcand" header="Candidat" ></Column>
+                                    <Column field="nomliste" header="Liste" ></Column>
+                                    <Column field="score" header="Score"></Column>
+                                    <Column field="score" header="Resultat" body={statusBodyTemplate}></Column>
+                                </DataTable>
                             </div>
+                            */}
                         </div>
                     </div>
                 </div>
