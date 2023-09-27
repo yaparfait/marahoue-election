@@ -52,6 +52,11 @@ function ConsultationSaisie() {
         return <Tag value={getTagValue(resultat)} severity={getSeverity(resultat)}></Tag>;
     };
 
+    const pourcentage = (resultat) => {
+        const somme = resultats.reduce((acc, r) => acc + parseInt(r.score), 0);
+        return somme === 0 ? 0 : (resultat.score/somme*100).toFixed(2);
+    }
+
     const itemTemplate = (resultat) => {
         return (
             <div className="col-12">
@@ -71,7 +76,7 @@ function ConsultationSaisie() {
                         </div>
                         <div className="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
                             <span className="text-xl font-semibold">{resultat.score}</span>
-                            <span className="text-l">{resultat.score}%</span>
+                            <span className="text-l font-semibold text-green-500">{pourcentage(resultat)}%</span>
                         </div>
                     </div>
                 </div>    
@@ -211,17 +216,7 @@ function ConsultationSaisie() {
                             <div className="card flex justify-content-center mt-5">
                                 <Chart type="pie" data={pieData} options={pieOptions} className="w-full md:w-30rem" />
                             </div>
-                            {/*
-                            <div className="card flex justify-content-center mt-5">
-                                <DataTable value={resultats} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }} >
-                                    <Column field="sigle" header="Parti" ></Column>
-                                    <Column field="nomcand" header="Candidat" ></Column>
-                                    <Column field="nomliste" header="Liste" ></Column>
-                                    <Column field="score" header="Score"></Column>
-                                    <Column field="score" header="Resultat" body={statusBodyTemplate}></Column>
-                                </DataTable>
-                            </div>
-                            */}
+                            
                         </div>
                     </div>
                 </div>

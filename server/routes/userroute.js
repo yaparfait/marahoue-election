@@ -15,7 +15,7 @@ const verifyUserToken = (req, res, next) => {
     }
     try {
         const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
-        req.user = {username: payload.username, email: payload.email, nomprenom: payload.nomprenom, profile: payload.profile};
+        req.user = {username: payload.username, email: payload.email, nomprenom: payload.nomprenom};
         next();
     } catch (err) {
         console.log(err);
@@ -24,7 +24,7 @@ const verifyUserToken = (req, res, next) => {
 };
 
 router.get("/", verifyUserToken, (req, res) => {
-    console.log("Requete User: "+ JSON.stringify(req.user));
+    //console.log("Requete User: "+ JSON.stringify(req.user));
     userdao.getAllUsers().then(data => res.json(data));
 });
 

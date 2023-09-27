@@ -88,4 +88,26 @@ async function getResultatByScrutin(idscrutin) {
     }
 }
 
-module.exports = {createVote, updateVote, getVoteByBureau, getResultatByScrutin};
+async function getResultatByScrutinLieuvote(idscrutin, idlieuvote) {
+    try {
+        // Use pool.query to get all contacts
+        let query = 'SELECT c.idcand,c.nomcand,c.nomusuel,c.nomliste,pa.idparti,pa.libparti,pa.sigle,sum(v.score) as score ' +
+                    'FROM participer p ' +
+                    'LEFT JOIN candidat c on c.idcand=p.idcand ' +
+                    'LEFT JOIN partipolitique pa on pa.idparti=p.idparti ' +                 
+                    'LEFT JOIN voter v on v.idcand=c.idcand ' +                  
+                    'LEFT JOIN bureauvote bv on bv.idbv=v.idbv ' +
+                    'LEFT JOIN lieuvote l on l.idlieuvote=bv.idlieuvote ' +
+                    'WHERE v.idsrutin=? and p.idscrutin=? and l.idlieuvote=? ' + 
+                    'GROUP BY p.priorite,c.idcand,c.nomcand ';
+
+        const results = await db.pool.query(query, [idscrutin, idscrutin, idlieuvote]);
+
+        return results;
+    } catch (err) {
+        // Print errors
+        console.log(err);
+    }
+}
+
+module.exports = {createVote, updateVote, getVoteByBureau, getResultatByScrutin, getResultatByScrutinLieuvote};

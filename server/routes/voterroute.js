@@ -26,4 +26,8 @@ router.get("/mairie/bouafle/resultat/final", (req, res) => {
     voter.getResultatByScrutin(envParam.commune.scrutin).then((data) => res.json(data))
 });
 
+router.get("/mairie/bouafle/resultat/lieuvote/:idlieuvote", (req, res) => {
+    voter.getResultatByScrutinLieuvote(envParam.commune.scrutin, req.params.idlieuvote).then((data) => res.json(data))
+});
+
 module.exports = router;

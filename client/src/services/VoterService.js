@@ -53,4 +53,10 @@ async function getResultatMunicipales() {
     return body;
 }
 
-module.exports = { createVote, updateVote, getVoteByBureau, getVoteByBureauMairie, getVoteByBureauRegion, getResultatMunicipales };
+async function getResultatMunicipalesByCentre(idlieuvote) {   
+    const response = await fetch("/voter/mairie/bouafle/resultat/lieuvote/"+idlieuvote);
+    const body = await response.json();
+    return body;
+}
+
+module.exports = { createVote, updateVote, getVoteByBureau, getVoteByBureauMairie, getVoteByBureauRegion, getResultatMunicipales, getResultatMunicipalesByCentre };
