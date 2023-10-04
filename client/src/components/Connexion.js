@@ -60,7 +60,7 @@ function Connexion() {
                         signIn({
                             token: data.token,
                             tokenType: "Bearer",
-                            expiresIn: 60,
+                            expiresIn: 24*60,
                             authState: { username: data.user.username, nomprenom: data.user.nomprenom, email: data.user.email, profile: data.user.profile }
                         });  
                         navigate("/accueil");     

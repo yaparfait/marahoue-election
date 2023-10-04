@@ -39,7 +39,6 @@ function SaisieMairie() {
     useEffect(() => {   
         lieuxService.getLieuVoteCommuneBouafle().then(data => {       
             setLieuItems(data);
-            //alert(lieuxvote)
         })
     }, [])
     
