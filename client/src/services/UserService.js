@@ -9,7 +9,7 @@ async function getAllUsers() {
 
 async function getUserByUsername(username) {
     
-    const response = await fetch("/users/" + username);
+    const response = await fetch("/users/infos/" + username);
     //const body = await response.json();
     return response;
 
@@ -37,4 +37,4 @@ async function loginUser(user){
     return response;
 }
 
-module.exports = {getAllUsers, getUserByUsername, registerUser, loginUser};
+export {getAllUsers, getUserByUsername, registerUser, loginUser};

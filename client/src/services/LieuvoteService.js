@@ -76,4 +76,4 @@ router.delete("/bureau-vote/:id", (req, res) => {
     lieuvote.deleteBureauVote(req.params.id).then(data => res.json(data));
 });
 */
-module.exports = { getLieuVote, getLieuVoteById, getLieuVoteByLocalites, getLieuVoteCommuneBouafle, createLieuVote, updateLieuVote, deleteLieuVote, getBureauVoteByLieu };
+export { getLieuVote, getLieuVoteById, getLieuVoteByLocalites, getLieuVoteCommuneBouafle, createLieuVote, updateLieuVote, deleteLieuVote, getBureauVoteByLieu };

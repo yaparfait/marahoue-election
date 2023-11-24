@@ -15,8 +15,8 @@ import askPic2 from '../assets/ask_pic2.jpg';
 import otherCand from '../assets/app_user.png';
 import exaequo from '../assets/exaequo.png';
 import yaoPic from '../assets/yao_etienne.jpg';
-
-const voterService = require("../services/VoterService.js");
+import { getResultatMunicipales } from "../services/VoterService";
+//const voterService = require("../services/VoterService.js");
 
 function ConsultationSaisie() {
 
@@ -86,7 +86,7 @@ function ConsultationSaisie() {
 
     useEffect(() => {
         const loadData = () => {
-            voterService.getResultatMunicipales().then(result => {
+            getResultatMunicipales().then(result => {
                 setResultats(result);
                 const maxval = result.map(res => res.score).reduce((a,b) => Math.max(a, b));
                 setWinners(result.filter(result => result.score === maxval.toString()));

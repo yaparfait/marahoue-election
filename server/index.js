@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const  connect  = require("./dbconnection.js");
 const deptRouter = require("./routes/deptroute.js");
 const sprefComRouter = require("./routes/sprefroute.js");
@@ -11,6 +12,15 @@ const PORT = process.env.API_PORT || 3001;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
+app.use((req, res, next) => {
+    // Autoriser les requêtes de n'importe quel domaine
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    
+    next();
+});
 
 app.use("/api/depts", deptRouter);
 app.use("/api/sprefs-com", sprefComRouter);

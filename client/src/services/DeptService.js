@@ -13,4 +13,4 @@ async function getDepartementsByRegion(idregion) {
     return body;
 }
 
-module.exports = { getDepartements, getDepartementsByRegion };
+export { getDepartements, getDepartementsByRegion };

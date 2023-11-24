@@ -8,8 +8,8 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import MenuParamItems from "./MenuParamItems.js";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
-const  sprefComService  = require("../services/SprefComService.js");
+import { getSprefCommune } from "../services/SprefComService";
+//const  sprefComService  = require("../services/SprefComService.js");
 
 function SousprefCommune() {
     const [sprefs, setSprefs] = useState([]);
@@ -17,7 +17,7 @@ function SousprefCommune() {
     const home = { icon: 'pi pi-home', url: '/accueil' }
 
     useEffect(() =>{
-        sprefComService.getSprefCommune().then(data => setSprefs(data));
+        getSprefCommune().then(data => setSprefs(data));
     }, []);
 
     const getLocaliteType = (rowData) => {

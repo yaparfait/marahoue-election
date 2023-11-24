@@ -28,7 +28,7 @@ router.get("/", verifyUserToken, (req, res) => {
     userdao.getAllUsers().then(data => res.json(data));
 });
 
-router.get("/:username", verifyUserToken, (req, res) => {
+router.get("/infos/:username", verifyUserToken, (req, res) => {
     userdao.getUserByLogin(req.params.username).then(users => {
         if(!users || users.length===0)
                 return res.status(400)

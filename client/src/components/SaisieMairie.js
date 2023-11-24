@@ -12,16 +12,17 @@ import { Column } from 'primereact/column';
 import { DataView  } from 'primereact/dataview';
 //import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
-import { InputText } from 'primereact/inputtext';
-import { InputNumber } from 'primereact/inputnumber';
+//import { InputText } from 'primereact/inputtext';
+//import { InputNumber } from 'primereact/inputnumber';
 import MenuList from '@mui/material/MenuList';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import PublicIcon from '@mui/icons-material/Public';
-
-const lieuxService = require("../services/LieuvoteService.js");
-const voterService = require("../services/VoterService.js");
+import { getLieuVoteCommuneBouafle, getBureauVoteByLieu} from "../services/LieuvoteService";
+import { getVoteByBureauMairie, getResultatMunicipalesByCentre } from "../services/VoterService";
+//const lieuxService = require("../services/LieuvoteService.js");
+//const voterService = require("../services/VoterService.js");
 
 function SaisieMairie() {
 
@@ -37,7 +38,7 @@ function SaisieMairie() {
     const toast = useRef(null);
    
     useEffect(() => {   
-        lieuxService.getLieuVoteCommuneBouafle().then(data => {       
+        getLieuVoteCommuneBouafle().then(data => {       
             setLieuItems(data);
         })
     }, [])
@@ -51,18 +52,18 @@ function SaisieMairie() {
             top: document.querySelector("#filAriane").offsetTop,
             behavior: "smooth",
         }); 
-        lieuxService.getBureauVoteByLieu(id).then(data => {
+        getBureauVoteByLieu(id).then(data => {
             let bureauvote = data.map(b => `{"name": "${b.libbv}", "value": "${b.idbv}"}`);
             let jsonString = '[' + bureauvote + ']';
             let jsonObject = JSON.parse(jsonString);
             setOptionItems(jsonObject);
             jsonObject && setSelectValue(jsonObject[0].value);
-            jsonObject && voterService.getVoteByBureauMairie(jsonObject[0].value).then(data => setVotesBureau(data));
+            jsonObject && getVoteByBureauMairie(jsonObject[0].value).then(data => setVotesBureau(data));
         })
-        voterService.getResultatMunicipalesByCentre(id).then(data => setResultats(data));
+        getResultatMunicipalesByCentre(id).then(data => setResultats(data));
 
     }
-
+/*
     const isPositiveInteger = (val) => {
         let str = String(val);
 
@@ -92,18 +93,19 @@ function SaisieMairie() {
                 else event.preventDefault();
                 break;
         }
-        voterService.updateVote(rowData).then(data => {
+        updateVote(rowData).then(data => {
             data.status === 200 ? toast.current.show({ severity: 'success', summary: 'Saisie de vote', detail: rowData.score + ' point(s) saisis pour le candidat ' + rowData.nomcand, life: 3000 }) :
                                   toast.current.show({ severity: 'error', summary: 'Erreur', detail: 'Votre saisie n\'a pas pu être enregistrée', life: 3000 });
             
-            selectedLieu && voterService.getResultatMunicipalesByCentre(selectedLieu.id).then(data => setResultats(data));                      
+            selectedLieu && getResultatMunicipalesByCentre(selectedLieu.id).then(data => setResultats(data));                      
         })
     };
+*/
     const onValueChange = (newValue) => {
         setSelectValue(newValue);
-        newValue ? voterService.getVoteByBureauMairie(newValue).then(data => setVotesBureau(data)) : setVotesBureau(null);
+        newValue ? getVoteByBureauMairie(newValue).then(data => setVotesBureau(data)) : setVotesBureau(null);
     }
-
+/*
     const cellEditor = (options) => {
         if (options.field === 'score') return numberEditor(options);
         else return textEditor(options);
@@ -116,7 +118,7 @@ function SaisieMairie() {
     const numberEditor = (options) => {
         return <InputNumber value={options.value} onValueChange={(e) => options.editorCallback(e.value)} />;
     };
-
+*/
     const leftToolbarTemplate = () => {
         return (
             <div className="flex flex-wrap gap-2">

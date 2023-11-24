@@ -1,6 +1,5 @@
 const mariadb = require('mariadb');
 // Expose the Pool object within this module
-/*
 module.exports = Object.freeze({
     pool: mariadb.createPool({
         host: 'localhost',
@@ -11,7 +10,7 @@ module.exports = Object.freeze({
         connectionLimit: 10
     })
 });
-*/
+/*
 module.exports = Object.freeze({
     pool: mariadb.createPool({
         host: 'localhost',
@@ -22,3 +21,4 @@ module.exports = Object.freeze({
         connectionLimit: 10
     })
 });
+*/

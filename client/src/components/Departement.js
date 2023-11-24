@@ -8,8 +8,8 @@ import { BreadCrumb } from 'primereact/breadcrumb';
 import MenuParamItems from "./MenuParamItems.js";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-
-const  deptService  = require("../services/DeptService.js");
+import { getDepartements } from "../services/DeptService";
+//const  deptService  = require("../services/DeptService.js");
 
 function Departement() {
     const [depts, setDepts] = useState([]);
@@ -17,7 +17,7 @@ function Departement() {
     const home = { icon: 'pi pi-home', url: '/accueil' }
 
     useEffect(() =>{
-        deptService.getDepartements().then(data => setDepts(data));
+        getDepartements().then(data => setDepts(data));
     }, [])
 
     const regionBodyTemplate = (rowData) => {

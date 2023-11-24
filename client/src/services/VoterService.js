@@ -59,4 +59,4 @@ async function getResultatMunicipalesByCentre(idlieuvote) {
     return body;
 }
 
-module.exports = { createVote, updateVote, getVoteByBureau, getVoteByBureauMairie, getVoteByBureauRegion, getResultatMunicipales, getResultatMunicipalesByCentre };
+export { createVote, updateVote, getVoteByBureau, getVoteByBureauMairie, getVoteByBureauRegion, getResultatMunicipales, getResultatMunicipalesByCentre };

@@ -16,10 +16,12 @@ import { InputNumber } from 'primereact/inputnumber';
 import { Dialog } from 'primereact/dialog';
 import { Dropdown } from 'primereact/dropdown';
 import { Toast } from 'primereact/toast';
-
-const lieuxService = require("../services/LieuvoteService.js");
-const deptService = require("../services/DeptService");
-const sprefComService = require("../services/SprefComService.js");
+import { getLieuVote, createLieuVote, updateLieuVote, deleteLieuVote } from "../services/LieuvoteService";
+import { getDepartements } from "../services/DeptService";
+import { getSprefComByDepartement } from "../services/SprefComService";
+//const lieuxService = require("../services/LieuvoteService.js");
+//const deptService = require("../services/DeptService");
+//const sprefComService = require("../services/SprefComService.js");
 
 function CentreVote() {
     const items = [{ label: 'Application' }, { label: 'Lieux de vote' }];
@@ -45,8 +47,8 @@ function CentreVote() {
     const [localites, setLocalites] = useState([]);
 
     useEffect(() => {
-        lieuxService.getLieuVote().then(data => setLieuxvote(data));
-        deptService.getDepartements().then(data => depts.current = data);
+        getLieuVote().then(data => setLieuxvote(data));
+        getDepartements().then(data => depts.current = data);
     }, [])
 
     const openNew = () => {
@@ -72,7 +74,7 @@ function CentreVote() {
     const hideUpdateLieuxDialog = () => {
         setUpdateLieuxDialog(false);
         setSelectedLieux(null);
-        lieuxService.getLieuVote().then(data => setLieuxvote(data));
+        getLieuVote().then(data => setLieuxvote(data));
     };
 
     const confirmDeleteSelected = () => {
@@ -82,31 +84,31 @@ function CentreVote() {
     const deleteSelectedLieux = () => {
 
         selectedLieux.forEach(l => {
-            lieuxService.deleteLieuVote(l.idlieuvote).then(data => {
+            deleteLieuVote(l.idlieuvote).then(data => {
                 data.status === 200 ? toast.current.show({ severity: 'success', summary: 'Succès', detail: 'Supprimer ' + l.liblieuvote + ' : ' + data.message, life: 3000 }) :
                                       toast.current.show({ severity: 'error', summary: 'Erreur', detail: 'Supprimer ' + l.liblieuvote + ' : ' + data.message, life: 3000 });
-                lieuxService.getLieuVote().then(data => setLieuxvote(data));
+                getLieuVote().then(data => setLieuxvote(data));
             })
         });
         setDeleteLieuxDialog(false);
         setSelectedLieux(null);
-        //lieuxService.getLieuVote().then(data => setLieuxvote(data));
+        //getLieuVote().then(data => setLieuxvote(data));
     };
 
     const saveLieuVote = () => {
         setSubmitted(true);
         //setLieuDialog(false);
         if (lieuvote.liblieuvote.trim()) {
-            lieuxService.createLieuVote(lieuvote).then(data => {
+            createLieuVote(lieuvote).then(data => {
                 data.status === 200 ? toast.current.show({ severity: 'success', summary: 'Succès', detail: data.message, life: 3000 }) :
                                       toast.current.show({ severity: 'error', summary: 'Erreur', detail: data.message, life: 3000 });
-                lieuxService.getLieuVote().then(data => setLieuxvote(data));
+                getLieuVote().then(data => setLieuxvote(data));
             })
             setSelectedDept(null);
             setSelectedLocalite(null);
             setLieuvote(emptyLieu);
             setLieuDialog(false);
-            //lieuxService.getLieuVote().then(data => setLieuxvote(data));
+            //getLieuVote().then(data => setLieuxvote(data));
         }
     }
 
@@ -114,21 +116,21 @@ function CentreVote() {
         setSubmitted(true);
 
         selectedLieux.forEach(l =>{
-            lieuxService.updateLieuVote(l).then(data => {
+            updateLieuVote(l).then(data => {
                 data.status === 200 ? toast.current.show({ severity: 'success', summary: 'Succès', detail: 'Modifier ' + l.liblieuvote + ' : ' + data.message, life: 3000 }) :
                                       toast.current.show({ severity: 'error', summary: 'Erreur', detail: 'Modifier ' + l.liblieuvote + ' : ' + data.message, life: 3000 });
-                //lieuxService.getLieuVote().then(data => setLieuxvote(data));
+                //getLieuVote().then(data => setLieuxvote(data));
             })        
         })
         setUpdateLieuxDialog(false);
         setSelectedLieux(null);
-        lieuxService.getLieuVote().then(data => setLieuxvote(data));
+        getLieuVote().then(data => setLieuxvote(data));
 
     }
 
     const onDepartementChange = (e) => {
         setSelectedDept(e.value);
-        sprefComService.getSprefComByDepartement(e.value.iddept).then(data => setLocalites(data));
+        getSprefComByDepartement(e.value.iddept).then(data => setLocalites(data));
     }
 
     const onLocaliteChange = (e) => {

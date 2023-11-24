@@ -1,4 +1,5 @@
 const mariadb = require('mariadb');
+const db = require("./dao/db");
 
 async function asyncFunction() {
     let conn;
@@ -8,7 +9,7 @@ async function asyncFunction() {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            password: '',
+            password: ''
         });
 
         // Print connection thread
@@ -31,7 +32,7 @@ async function testConnection() {
             host: 'localhost',
             port: '3306',
             user: 'root',
-            password: '',
+            password: ''
         });
 
         // Print connection thread

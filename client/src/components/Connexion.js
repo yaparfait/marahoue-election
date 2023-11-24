@@ -12,8 +12,8 @@ import { Messages } from 'primereact/messages';
 import { useNavigate } from "react-router-dom";
 //import logo from "../logo.svg";
 import logo from "../assets/laMarahoue.png";
-
-const  userService  = require("../services/UserService.js");
+import {loginUser} from "../services/UserService";
+//const  userService  = require("../services/UserService.js");
 
 function Connexion() {
     const [checked, setChecked] = useState(false);
@@ -41,7 +41,8 @@ function Connexion() {
 		}
 	}
 */
-    const seconnecter = () => {
+    //const async function seconnecter = () => {
+    async function seconnecter () {
         msgs.current.clear();
         if (!inputEmail || !inputPassword){
             msgs.current.show(
@@ -49,12 +50,14 @@ function Connexion() {
             );
         } else {
             const userData = { username: inputEmail, password: inputPassword};
-            userService.loginUser(userData).then(res => {
+            /*
+            loginUser(userData).then(res => {
                 if (res.status !== 200){
                     res.json().then(data => 
                         msgs.current.show(
                             { severity: 'error', summary: 'Attention', detail: data.message, sticky: true, closable: false }
-                    ))
+                        )                    
+                    )                  
                 } else {
                     res.json().then(data => {    
                         signIn({
@@ -67,6 +70,38 @@ function Connexion() {
                     });
                 }
             })
+            .catch(error => console.error('Erreur lors de la connexion: ', error));
+            */
+           try {
+                const res = await loginUser(userData);
+
+                if (!res.ok) {
+                    const data = await res.json();
+                    msgs.current.show({
+                        severity: 'error',
+                        summary: 'Attention',
+                        detail: data.message,
+                        sticky: true,
+                        closable: false
+                    });
+                } else {
+                    const data = await res.json();
+                    signIn({
+                        token: data.token,
+                        tokenType: 'Bearer',
+                        expiresIn: 24 * 60,
+                        authState: {
+                            username: data.user.username,
+                            nomprenom: data.user.nomprenom,
+                            email: data.user.email,
+                            profile: data.user.profile
+                        }
+                    });
+                    navigate('/accueil');
+                }
+           } catch (error) {
+                console.error('Erreur lors de la connexion: ', error);     
+           }
         }
     }
 

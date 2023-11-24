@@ -15,4 +15,4 @@ async function getSprefComByDepartement(iddept) {
 
 }
 
-module.exports = { getSprefCommune, getSprefComByDepartement };
+export { getSprefCommune, getSprefComByDepartement };
