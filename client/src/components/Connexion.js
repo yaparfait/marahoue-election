@@ -2,7 +2,7 @@ import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
-import { useState, useRef } from 'react';
+import { useState, useRef, CSSProperties } from 'react';
 import { useSignIn } from "react-auth-kit";
 //import {useIsAuthenticated} from 'react-auth-kit';
 import { Button } from 'primereact/button';
@@ -10,15 +10,21 @@ import { InputText } from 'primereact/inputtext';
 import { Checkbox } from 'primereact/checkbox';
 import { Messages } from 'primereact/messages';
 import { useNavigate } from "react-router-dom";
-//import logo from "../logo.svg";
 import logo from "../assets/laMarahoue.png";
 import {loginUser} from "../services/UserService";
-//const  userService  = require("../services/UserService.js");
+import ClipLoader from "react-spinners/ClipLoader";
 
+const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "green",
+};
+  
 function Connexion() {
     const [checked, setChecked] = useState(false);
     const [inputEmail, setInputEmail] = useState('');
     const [inputPassword, setInputPassword] = useState('');
+    const [loading, setLoading] = useState(false);
     //const isAuthenticated = useIsAuthenticated();
     const signIn = useSignIn();
     const navigate = useNavigate();
@@ -50,6 +56,7 @@ function Connexion() {
             );
         } else {
             const userData = { username: inputEmail, password: inputPassword};
+            setLoading(true);
             /*
             loginUser(userData).then(res => {
                 if (res.status !== 200){
@@ -77,6 +84,7 @@ function Connexion() {
 
                 if (!res.ok) {
                     const data = await res.json();
+                    setLoading(false);
                     msgs.current.show({
                         severity: 'error',
                         summary: 'Attention',
@@ -106,13 +114,14 @@ function Connexion() {
     }
 
     return (
-        <div className="flex align-items-center justify-content-center">
-            <div className="surface-card p-4 shadow-2 border-round w-full lg:w-4" style={{marginTop: "0px"}}>
+        <div className="flex align-items-center justify-content-center">           
+            <div className="surface-card p-4 shadow-2 border-round w-full lg:w-4" style={{marginTop: "0px"}}>           
                 <div className="text-center mb-5">
                     <img src={logo} alt="hyper" height={100} className="mb-3" />
                     <div className="text-900 text-3xl font-medium mb-3">Bienvenue</div>
                     <span className="text-600 font-medium line-height-3">Vous n'avez pas de compte?</span>
                     <a className="font-medium no-underline ml-2 text-blue-500 cursor-pointer">Créer un compte!</a>
+                    <ClipLoader color={'#fff'} loading={loading} cssOverride={override} size={150} />
                 </div>
 
                 <div>

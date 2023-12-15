@@ -16,6 +16,7 @@ import otherCand from '../assets/app_user.png';
 import exaequo from '../assets/exaequo.png';
 import yaoPic from '../assets/yao_etienne.jpg';
 import { getResultatMunicipales } from "../services/VoterService";
+import transition from "./transition";
 //const voterService = require("../services/VoterService.js");
 
 function ConsultationSaisie() {
@@ -226,4 +227,4 @@ function ConsultationSaisie() {
     )
 }
 
-export default ConsultationSaisie;
+export default transition(ConsultationSaisie);

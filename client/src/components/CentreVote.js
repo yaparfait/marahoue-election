@@ -19,6 +19,7 @@ import { Toast } from 'primereact/toast';
 import { getLieuVote, createLieuVote, updateLieuVote, deleteLieuVote } from "../services/LieuvoteService";
 import { getDepartements } from "../services/DeptService";
 import { getSprefComByDepartement } from "../services/SprefComService";
+import { motion } from 'framer-motion';
 //const lieuxService = require("../services/LieuvoteService.js");
 //const deptService = require("../services/DeptService");
 //const sprefComService = require("../services/SprefComService.js");
@@ -252,7 +253,10 @@ function CentreVote() {
                 </div>
                 <div class="col">
                     <BreadCrumb model={items} home={home} className="filAriane" />
-                    <div className="col-12 p-4 text-center md:text-left flex align-items-center surface-0 text-800">
+                    <motion.div className="col-12 p-4 text-center md:text-left flex align-items-center surface-0 text-800"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1}}>
                         <section>
                             <div className="text-6xl text-primary font-bold mb-3">Lieux de vote</div>
                             <Toolbar className="mb-3 p-2" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
@@ -266,7 +270,7 @@ function CentreVote() {
                                 <Column field="libsprefcom" header="Localité"></Column>
                             </DataTable>
                         </section>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
 

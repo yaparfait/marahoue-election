@@ -6,6 +6,7 @@ import '../styles/Accueil.css';
 import MenuGeneral from './MenuGeneral';
 import { BreadCrumb } from 'primereact/breadcrumb';
 import askPic from '../assets/ask_pic1.jpg';
+import transition from './transition';
 //import logoMarahoue from '../assets/laMarahoue.png';
 //import { useAuthUser, useAuthHeader } from 'react-auth-kit';
 
@@ -38,4 +39,4 @@ function Accueil() {
 
 }
 
-export default Accueil;
+export default transition(Accueil);

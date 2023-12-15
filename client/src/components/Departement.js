@@ -9,6 +9,7 @@ import MenuParamItems from "./MenuParamItems.js";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { getDepartements } from "../services/DeptService";
+import { motion } from 'framer-motion';
 //const  deptService  = require("../services/DeptService.js");
 
 function Departement() {
@@ -36,7 +37,11 @@ function Departement() {
                 </div>
                 <div class="col">
                     <BreadCrumb model={items} home={home} className="filAriane" />
-                    <div className="col-12 p-4 text-center md:text-left flex align-items-center surface-0 text-800">
+
+                    <motion.div className="col-12 p-4 text-center md:text-left flex align-items-center surface-0 text-800"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 1}}>
                         <section>
                             <div className="text-6xl text-primary font-bold mb-3">Departements</div>
                             <DataTable value={depts} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }}>
@@ -45,7 +50,8 @@ function Departement() {
                                 <Column field="idregion" header="Region" body={regionBodyTemplate}></Column>
                             </DataTable>
                         </section>
-                    </div>
+                    </motion.div>
+
                 </div>
             </div>
 

@@ -21,6 +21,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import PublicIcon from '@mui/icons-material/Public';
 import { getLieuVoteCommuneBouafle, getBureauVoteByLieu} from "../services/LieuvoteService";
 import { getVoteByBureauMairie, getResultatMunicipalesByCentre } from "../services/VoterService";
+import transition from "./transition";
 //const lieuxService = require("../services/LieuvoteService.js");
 //const voterService = require("../services/VoterService.js");
 
@@ -244,4 +245,4 @@ function SaisieMairie() {
     );
 }
 
-export default SaisieMairie;
+export default transition(SaisieMairie);

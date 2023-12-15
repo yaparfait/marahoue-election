@@ -6,6 +6,7 @@ import MenuGeneral from "./MenuGeneral";
 import { BreadCrumb } from 'primereact/breadcrumb';
 //import { Menu } from 'primereact/menu';
 import MenuParamItems from "./MenuParamItems.js";
+import transition from "./transition";
 
 function Parametrage() {
 
@@ -37,4 +38,4 @@ function Parametrage() {
     );
 }
 
-export default Parametrage;
+export default transition(Parametrage);
