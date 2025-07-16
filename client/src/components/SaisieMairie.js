@@ -227,7 +227,7 @@ function SaisieMairie() {
                             <span className="block text-6xl text-primary font-bold mb-1">Municipales 2023 - Commune de Bouafle</span>
                             {selectedLieu && <div className="text-6xl text-green-700 font-bold mb-3">Lieu de vote : {selectedLieu.name}</div>}
                             
-                            <Toolbar className="mb-3 p-1" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                            <Toolbar className="mb-3 p-1" start={leftToolbarTemplate} end={rightToolbarTemplate}></Toolbar>
                             <DataTable value={votesBureau} editMode="cell" showGridlines stripedRows tableStyle={{ minWidth: '50rem' }} >
                                 {/*<Column field="idvote" header="Id"></Column>*/}
                                 <Column field="sigle" header="Parti" ></Column>

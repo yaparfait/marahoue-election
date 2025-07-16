@@ -3,27 +3,22 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import { useState, useEffect } from 'react';
-import MenuGeneral from "./MenuGeneral";
+import MenuGeneral from "./MenuGeneral.js";
 import { BreadCrumb } from 'primereact/breadcrumb';
 import MenuParamItems from "./MenuParamItems.js";
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { getDepartements } from "../services/DeptService";
+import { getAllPartiPolitics } from "../services/PartiService.js";
 import { motion } from 'framer-motion';
-//const  deptService  = require("../services/DeptService.js");
 
 function Departement() {
-    const [depts, setDepts] = useState([]);
-    const items = [{ label: 'Application' }, { label: 'Paramétrage' }, { label: 'Departements' }];
+    const [partis, setPartis] = useState([]);
+    const items = [{ label: 'Application' }, { label: 'Paramétrage' }, { label: 'Partis politiques' }];
     const home = { icon: 'pi pi-home', url: '/accueil' }
 
     useEffect(() =>{
-        getDepartements().then(data => setDepts(data));
+        getAllPartiPolitics().then(data => setPartis(data));
     }, [])
-
-    const regionBodyTemplate = (rowData) => {
-        return rowData.libregion + ' | ' + rowData.idregion;
-    };
 
     return (
         <div>
@@ -43,11 +38,11 @@ function Departement() {
                         animate={{ opacity: 1 }}
                         transition={{ duration: 1}}>
                         <section>
-                            <div className="text-6xl text-primary font-bold mb-3">Departements</div>
-                            <DataTable value={depts} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }}>
-                                <Column field="iddept" header="Id"></Column>
-                                <Column field="libdept" header="Nom"></Column>
-                                <Column field="idregion" header="Region" body={regionBodyTemplate}></Column>
+                            <div className="text-6xl text-primary font-bold mb-3">Partis politiques</div>
+                            <DataTable value={partis} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }}>
+                                <Column field="idparti" header="Id"></Column>
+                                <Column field="libparti" header="Nom"></Column>
+                                <Column field="sigle" header="Sigle"></Column>
                             </DataTable>
                         </section>
                     </motion.div>

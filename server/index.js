@@ -6,6 +6,9 @@ const sprefComRouter = require("./routes/sprefroute.js");
 const lieuvoteRouter = require("./routes/lieuvoteroute.js");
 const voterRouter = require("./routes/voterroute.js");
 const userRouter = require("./routes/userroute.js");
+const partiRouter = require("./routes/partiroute.js");
+const candRouter = require("./routes/candidatroute.js");
+const scrutinRouter = require("./routes/scrutinroute.js");
 require("dotenv").config();
 
 const PORT = process.env.API_PORT || 3001;
@@ -27,6 +30,9 @@ app.use("/api/sprefs-com", sprefComRouter);
 app.use("/api/lieuvote", lieuvoteRouter);
 app.use("/api/voter", voterRouter);
 app.use("/api/users", userRouter);
+app.use("/api/partis", partiRouter);
+app.use("/api/candidats", candRouter);
+app.use("/api/scrutins", scrutinRouter);
 
 app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });

@@ -24,36 +24,23 @@ export default function MenuParamItems() {
                 }
             ]
         },
-        /*
-        {
-            label: 'Centres de vote',
-            items: [
-                {
-                    label: 'Lieux de vote', 
-                    icon: 'pi pi-fw pi-sitemap',
-                    command: () => navigate('/centre-vote')
-                },
-                {
-                    label: 'Bureaux de vote',
-                    icon: 'pi pi-fw pi-trash'
-                }
-            ]
-        },
-        */
         {
             label: 'Candidature',
             items: [
                 {
                     label: 'Partis politiques',
-                    icon: 'pi pi-fw pi-users'
+                    icon: 'pi pi-fw pi-users',
+                    command: () => navigate('/parti-politique')
                 },
                 {
                     label: 'Candidats',
-                    icon: 'pi pi-fw pi-user'
+                    icon: 'pi pi-fw pi-user',
+                    command: () => navigate('/candidat')
                 },
                 {
                     label: 'Scrutins',
-                    icon: 'pi pi-fw pi-envelope'
+                    icon: 'pi pi-fw pi-envelope',
+                    command: () => navigate('/scrutin')
                 }
             ]
         },
@@ -84,5 +71,3 @@ export default function MenuParamItems() {
         </div>
     )
 }
-
-//export default MenuParamItems;

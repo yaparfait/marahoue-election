@@ -20,12 +20,9 @@ import { getLieuVote, createLieuVote, updateLieuVote, deleteLieuVote } from "../
 import { getDepartements } from "../services/DeptService";
 import { getSprefComByDepartement } from "../services/SprefComService";
 import { motion } from 'framer-motion';
-//const lieuxService = require("../services/LieuvoteService.js");
-//const deptService = require("../services/DeptService");
-//const sprefComService = require("../services/SprefComService.js");
 
 function CentreVote() {
-    const items = [{ label: 'Application' }, { label: 'Lieux de vote' }];
+    const items = [{ label: 'Application' }, { label: 'Paramétrage' }, { label: 'Lieux de vote' }];
     const home = { icon: 'pi pi-home', url: '/accueil' }
     let emptyLieu = {
         idlieuvote: null,
@@ -259,7 +256,7 @@ function CentreVote() {
                         transition={{ duration: 1}}>
                         <section>
                             <div className="text-6xl text-primary font-bold mb-3">Lieux de vote</div>
-                            <Toolbar className="mb-3 p-2" left={leftToolbarTemplate} right={rightToolbarTemplate}></Toolbar>
+                            <Toolbar className="mb-3 p-2" start={leftToolbarTemplate} end={rightToolbarTemplate}></Toolbar>
                             <DataTable value={lieuxvote} dataKey='idlieuvote' selectionMode='checkbox' selection={selectedLieux} onSelectionChange={(e) => setSelectedLieux(e.value)} showGridlines stripedRows tableStyle={{ minWidth: '50rem' }}>
                                 <Column selectionMode="multiple"></Column>
                                 <Column header="#" headerStyle={{ width: '3rem' }} body={(data, options) => options.rowIndex + 1}></Column>

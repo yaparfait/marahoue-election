@@ -14,7 +14,7 @@ import { motion } from 'framer-motion';
 
 function SousprefCommune() {
     const [sprefs, setSprefs] = useState([]);
-    const items = [{ label: 'Application' }, { label: 'Departements' }];
+    const items = [{ label: 'Application' }, { label: 'Paramétrage' }, { label: 'Communes et Sous-Prefectures' }];
     const home = { icon: 'pi pi-home', url: '/accueil' }
 
     useEffect(() =>{

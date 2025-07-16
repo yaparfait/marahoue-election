@@ -19,54 +19,7 @@ function MenuGeneral() {
     const navigate = useNavigate();
     const [visible, setVisible] = useState(false);
     const signOut = useSignOut();
-/*
-    const items = [
-        {
-            label: 'Accueil',
-            icon: 'pi pi-home',
-            command: () => navigate('/accueil')
-        },            
-        {
-            label: 'Saisie',
-            icon: 'pi pi-fw pi-pencil',
-            command: () => navigate('/saisie')
-        },
-        {
-            label: 'Municipale',
-            icon: 'pi pi-fw pi-pencil',
-            command: () => navigate('/saisie-mairie')
-        },
-        {
-            label: 'Regionale',
-            icon: 'pi pi-fw pi-pencil',
-            command: () => navigate('/saisie-region')
-        },
-        {
-            label: 'Consultation',
-            icon: 'pi pi-envelope',
-            command: () => navigate('/consultation')
-        },  
-        {
-            label: 'Parametrage',
-            icon: 'pi pi-cog',
-            command: () => navigate('/parametrage')
-        },  
-        {
-            label: 'Page Template',
-            icon: 'pi pi-star',
-            command: () => navigate('/template')
-        },  
-        {
-            label: '',
-            icon: 'pi pi-th-large'
-        },     
-        {
-            label: 'Quitter',
-            icon: 'pi pi-fw pi-power-off',
-            command: () => setVisible(true)
-        }
-    ];
-*/
+
     const itemsMairie = [
         {
             label: 'Accueil',

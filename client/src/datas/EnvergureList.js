@@ -1,0 +1,1 @@
+export const envergureList = ['COMMUNE','REGION',"NATIONAL"]

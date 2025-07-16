@@ -16,6 +16,9 @@ import PageTemplate from './PageTemplate';
 import Departement from './Departement';
 import SousprefCommune from './SousprefCommune';
 import CentreVote from './CentreVote';
+import PartiPolitique from './PartiPolitique';
+import Candidat from './Candidat';
+import Scrutin from './Scrutin';
 import { AuthProvider, RequireAuth } from 'react-auth-kit';
 import { AnimatePresence } from 'framer-motion';
 
@@ -81,6 +84,21 @@ function App() {
             <Route exact path="/centre-vote" element={
               <RequireAuth loginPath='/'>
                 <CentreVote />
+              </RequireAuth>
+            } />
+            <Route exact path="/parti-politique" element={
+              <RequireAuth loginPath='/'>
+                <PartiPolitique />
+              </RequireAuth>
+            } />
+            <Route exact path="/candidat" element={
+              <RequireAuth loginPath='/'>
+                <Candidat />
+              </RequireAuth>
+            } />
+            <Route exact path="/scrutin" element={
+              <RequireAuth loginPath='/'>
+                <Scrutin />
               </RequireAuth>
             } />
           </Routes>
